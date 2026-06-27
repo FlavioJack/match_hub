@@ -83,8 +83,10 @@ class Match():
     def add_score(self, score_a, score_b):
         self.team_a.add_score(score_a)
         self.team_b.add_score(score_b)
+    def get_status(self):
+        return self.status.value
     def __str__(self):
-        return f" -- Match {self.status.value} || {self.team_a.name} {self.team_a_pts} - {self.team_b_pts} {self.team_b.name}."
+        return f" -- Match {self.get_status()} || {self.get_team_names()[0]} {self.get_score()[0]} - {self.get_score()[1]} {self.get_team_names()[1]}."
 
     
     
