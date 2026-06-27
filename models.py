@@ -2,9 +2,9 @@ from enum import Enum
 import datetime
 
 class MatchStatus(Enum):
-    DA_INIZIARE = 1
-    IN_CORSO = 2
-    FINITA = 3
+    DA_INIZIARE = "da iniziare"
+    IN_CORSO = "in corso"
+    FINITA = "finita"
 
 class Player():
     def __init__(self, name):
@@ -27,10 +27,15 @@ class Team():
         self.points = points
     def add_points(self, points):
         self.points += points
+    def get_players(self):
+        players_names = ", ".join(player.name for player in self.players)
+        return players_names
     def add_player(self, player):
         self.players.append(player)
     def remove_player(self, player):
         self.players.remove(player)
+    def __str__(self):
+        return f" -- Team \"{self.name.upper()}\" composto dai membri: {self.get_players()}."
     
     
 
@@ -49,6 +54,8 @@ class Match():
     def add_points(self, points_a, points_b):
         self.team_a.add_points(points_a)
         self.team_b.add_points(points_b)
+    def __str__(self):
+        return f" -- Match {self.status.value} || {self.team_a.name} {self.team_a_pts} - {self.team_b_pts} {self.team_b.name}."
 
     
     

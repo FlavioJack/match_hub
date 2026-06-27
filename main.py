@@ -1,19 +1,26 @@
-
+from models import Player, Team, Match
 
 def main():
-    print("Selezionare una scelta dal menu: ")
-    print("""
-            1. Area tornei
-            2. Partite
-            3. Classifica
-            4. Giocatori """)
+    flavio = Player("Flavio")
+    matteo = Player("Matteo")
+    gabri = Player("Gabri")
+    taccio = Player("Taccio")
 
-    selection = int(input())
-    
-    while(selection > 4 or selection < 1):
-        print("!!! Hai inserito un valore errato !!!")
-        selection = int(input())
-    
+    team_a = Team("siegehub")
+    team_b = Team("teamvito")
+
+    team_a.add_player(flavio)
+    team_a.add_player(matteo)
+
+    team_b.add_player(gabri)
+    team_b.add_player(taccio)
+
+    match1 = Match(team_a, team_b)
+
+    print(team_a)
+    print(team_b)
+    print(match1)
+
     return
 
 
