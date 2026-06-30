@@ -44,7 +44,7 @@ def main():
                 print("❌ Nome già in uso, scegline un altro!")
             else:
                 registration(player_name, players_register, 1)
-                print(f"✅ Nome \"{name}\" inserito correttamente!")
+                print(f"✅ Nome \"{player_name}\" inserito correttamente!")
         elif sel_menu == "2":
             team_name = input("Inserisci il nome del team: ")
             new_team = registration(team_name, teams_register, 2)
