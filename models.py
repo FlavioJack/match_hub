@@ -23,7 +23,7 @@ class Player():
         self.win += n
     def add_lost(self, n):
         self.win += n
-    def add_draws(self, n):
+    def add_draw(self, n):
         self.win += n
 
 class Team():
@@ -70,13 +70,14 @@ class Team():
 
 class Match():
     def __init__(self, team_a, team_b):
+        self.name = ""+team_a.get_name()+" vs "+team_b.get_name()
         self.date = datetime.date.today()
         self.team_a = team_a
         self.team_b = team_b
         self.status = MatchStatus.DA_INIZIARE
     def get_date(self):
         return self.date
-    def get_team_names(self):
+    def get_teams_names(self):
         return [self.team_a.get_name(), self.team_b.get_name()]
     def get_score(self):
         return [self.team_a.get_score(), self.team_b.get_score()]
@@ -86,7 +87,7 @@ class Match():
     def get_status(self):
         return self.status.value
     def __str__(self):
-        return f" -- Match {self.get_status()} || {self.get_team_names()[0]} {self.get_score()[0]} - {self.get_score()[1]} {self.get_team_names()[1]}."
+        return f" -- Match {self.get_status()} || {self.get_teams_names()[0]} {self.get_score()[0]} - {self.get_score()[1]} {self.get_teams_names()[1]}."
 
     
     

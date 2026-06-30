@@ -1,30 +1,56 @@
 from models import Player, Team, Match
 
+def registration(name, register, regtype):
+    if name in register:
+        print("❌ Nome già in uso, scegline un altro!")
+    else:
+        if regtype == 1:
+            new_player = Player(name)
+            register[name] = new_player
+        elif regtype == 2:
+            new_team = Team(name)
+            register[name] = new_team
+        
+        print(f"✅ Nome \"{name}\" inserito correttamente!")
+
+#def create_match(team_a, team_b):
+
+
 def main():
-    flavio = Player("Flavio")
-    matteo = Player("Matteo")
-    gabri = Player("Gabri")
-    taccio = Player("Taccio")
 
-    team_a = Team("siegehub")
-    team_b = Team("teamvito")
+    players_register = {}
+    teams_register = {}
+    matches_register = {}
 
-    team_a.add_player(flavio)
-    team_a.add_player(matteo)
+  
+    #match1 = Match(team_a, team_b)
+   
 
-    team_b.add_player(gabri)
-    team_b.add_player(taccio)
+    while(True):
+        print("\n\n########## MAIN MENU ##########")
+        print(" 1.Creare Player")
+        print(" 2.Creare Team")
+        print(" 3.Creare Match")
 
-    match1 = Match(team_a, team_b)
+        sel_menu = int(input("Seleziona il menu: "))
+        if sel_menu == 1:
+            player_name = input("Inserisci il nome del giocatore: ")
+            registration(player_name, players_register, 1)
+        elif sel_menu == 2:
+            team_name = input("Inserisci il nome del team: ")
+            registration(team_name, teams_register, 2)
+            print("Giocatori disponibili: ", end="")
+            for player in players_register.keys():
+                print(player, end=" ")
+            print("")
+            print("Adesso aggiungi giocatori tra quelli disponibili")
+            temp = []
+            # scegli le key dei nomi, aggiungi a temp, per ogni elemento di temp aggiungi al team
 
-    print(team_a)
-    print(team_b)
-    print(match1)
-
-    return
-
-
-
+        elif sel_menu == 3:
+            print("Elenco dei team presenti: ")
+            for t in teams_register: 
+                print(t)
 
 
 
