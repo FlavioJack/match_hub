@@ -1,19 +1,15 @@
 from models import Player, Team, Match
 
 def registration(name, register, regtype):
-    if name in register:
-        print("❌ Nome già in uso, scegline un altro!")
-    else:
-        if regtype == 1:
-            new_player = Player(name)
-            register[name] = new_player
-            print(f"✅ Nome \"{name}\" inserito correttamente!")
-            return new_player
-        elif regtype == 2:
-            new_team = Team(name)
-            register[name] = new_team
-            print(f"✅ Nome \"{name}\" inserito correttamente!")
-            return new_team
+    if regtype == 1:
+        new_player = Player(name)
+        register[name] = new_player
+        return new_player
+    elif regtype == 2:
+        new_team = Team(name)
+        register[name] = new_team
+        return new_team
+        
 
         
         
@@ -42,7 +38,13 @@ def main():
 
         if sel_menu == "1":
             player_name = input("Inserisci il nome del giocatore: ")
-            registration(player_name, players_register, 1)
+            while player_name.strip() == "":
+                player_name = input("Non puoi lasciare campo vuoto, inserisci il nome del giocatore: ")
+            if player_name in players_register:
+                print("❌ Nome già in uso, scegline un altro!")
+            else:
+                registration(player_name, players_register, 1)
+                print(f"✅ Nome \"{name}\" inserito correttamente!")
         elif sel_menu == "2":
             team_name = input("Inserisci il nome del team: ")
             new_team = registration(team_name, teams_register, 2)
