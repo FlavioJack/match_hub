@@ -11,7 +11,11 @@ def registration(name, register, regtype):
         return new_team
         
 
-        
+def show_player_menu():
+    print("\n\n===== PLAYER MENU =====")
+    print(" 1.Create Player")
+    print(" 2.Show Players and Stats")
+    print(" 3.Back to Main Menu")        
         
         
 
@@ -30,24 +34,44 @@ def main():
     sel_menu = "0"
     while sel_menu.strip()!="":
         print("\n\n########## MAIN MENU ##########")
-        print(" 1.Creare Player")
-        print(" 2.Creare Team")
-        print(" 3.Creare Match")
+        print(" 1.Menu Player")
+        print(" 2.Menu Team")
+        print(" 3.Menu Match")
 
         sel_menu = input("Seleziona il menu: ")
 
-        # CREATE PLAYERS
+        # MENU PLAYERS
         if sel_menu == "1":
-            player_name = input("Inserisci il nome del giocatore: ")
-            while player_name.strip() == "":
-                player_name = input("Non puoi lasciare campo vuoto, inserisci il nome del giocatore: ")
-            if player_name in players_register:
-                print("❌ Nome già in uso, scegline un altro!")
-            else:
-                registration(player_name, players_register, 1)
-                print(f"✅ Nome \"{player_name}\" inserito correttamente!")
+            while True:
+                show_player_menu()
+                submenu = input("Seleziona il sottomenu: ")
+                # CREATE PLAYER
+                if submenu == "1":
+                    print(" || CREAZIONE GIOCATORI || ")
+                    while True:
+                        player_name = input("Inserisci il nome del giocatore che vuoi aggiungere: ")
+                        if player_name not in players_register and player_name.strip() != "":
+                            registration(player_name, players_register, 1)
+                            print(f"✅ Nome \"{player_name}\" inserito correttamente!")
+                        elif player_name.strip() != "":
+                            print("❌ Nome già in uso, scegline un altro!")
+                        else:
+                            break
+                # SHOW PLAYERS STATS   
+                elif submenu == "2":
+                    print(" || ELENCO GIOCATORI E STATISTICHE || ")
+                    for name in players_register:
+                        print(players_register[name])
+                # BACK TO MAIN MENU  
+                elif submenu == "3": 
+                    break
+                else:
+                    print("⚠️ Inserisci un valore tra 1 e 3")
+
+
+            
         
-        # CREATE TEAMS
+        # MENU TEAMS
         elif sel_menu == "2":
             team_name = input("Inserisci il nome del team: ")
             new_team = registration(team_name, teams_register, 2)
