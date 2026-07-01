@@ -15,7 +15,13 @@ def show_player_menu():
     print("\n\n===== PLAYER MENU =====")
     print(" 1.Create Player")
     print(" 2.Show Players and Stats")
-    print(" 3.Back to Main Menu")        
+    print(" 3.Back to Main Menu")      
+
+def show_team_menu():
+    print("\n\n===== TEAM MENU =====")
+    print(" 1.Create Team")
+    print(" 2.Show Teams and Stats")
+    print(" 3.Back to Main Menu")   
         
         
 
@@ -69,32 +75,46 @@ def main():
                     print("⚠️ Inserisci un valore tra 1 e 3")
 
 
-            
-        
         # MENU TEAMS
         elif sel_menu == "2":
-            team_name = input("Inserisci il nome del team: ")
-            new_team = registration(team_name, teams_register, 2)
+            while True:
+                show_team_menu()
+                submenu = input("Seleziona il sottomenu: ")
+                # CREATE TEAM
+                if submenu == "1":
+                    team_name = input("Inserisci il nome del team: ")
+                    new_team = registration(team_name, teams_register, 2)
 
-            print("Giocatori disponibili: ", end="")
-            for player in players_register.keys():
-                print(player, end=" ")
-            print("")
-            # choose names, append to list and foreach list's element (player name) 
-            # pick from the player objects register and add to the team object
-            print("Adesso aggiungi nomi di giocatori tra quelli disponibili")
-            players_for_team = []
-            sel_name = input("Digita nome giocatore + Enter, altrimenti Enter per terminare: ").strip()
-            while sel_name != "":
-                if sel_name in players_register.keys():
-                    players_for_team.append(sel_name)
-                else: 
-                    print("❌ Nome non presente tra quelli disponibili, controlla maiuscole e minuscole.")
-                sel_name = input("Digita nome giocatore + Enter, altrimenti Enter per terminare: ").strip()
-            for player in players_for_team:
-                new_team.add_player(players_register[player])
+                    print("Giocatori disponibili: ", end="")
+                    for player in players_register.keys():
+                        print(player, end=" ")
+                    print("")
+                    # choose names, append to list and foreach list's element (player name) 
+                    # pick from the player objects register and add to the team object
+                    print("Adesso aggiungi nomi di giocatori tra quelli disponibili")
+                    players_for_team = []
+                    sel_name = input("Digita nome giocatore + Enter, altrimenti Enter per terminare: ").strip()
+                    while sel_name != "":
+                        if sel_name in players_register.keys():
+                            players_for_team.append(sel_name)
+                        else: 
+                            print("❌ Nome non presente tra quelli disponibili, controlla maiuscole e minuscole.")
+                        sel_name = input("Digita nome giocatore + Enter, altrimenti Enter per terminare: ").strip()
+                    for player in players_for_team:
+                        new_team.add_player(players_register[player])
+                # SHOW TEAMS STATS
+                elif submenu == "2":
+                    print(" || ELENCO SQUADRE E STATISTICHE || ")
+                    for name in teams_register:
+                        print(teams_register[name])
+                # BACK TO MAIN MENU
+                elif submenu == "3": 
+                    break
+                else:
+                    print("⚠️ Inserisci un valore tra 1 e 3")
         
-        # CREATE MATCH
+            
+        # MENU MATCH
         elif sel_menu == "3":
             print("Elenco dei team presenti: ")
             for t in teams_register: 
