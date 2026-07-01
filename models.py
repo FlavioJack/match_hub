@@ -64,7 +64,7 @@ class Team():
         self.win += n
     
     def __str__(self):
-        return f" -- Team \"{self.get_name().upper()}\" composto dai membri: {self.get_players()}."
+        return f" -- Team \"{self.get_name()}\" composto dai membri: {self.get_players()}."
     
     
 

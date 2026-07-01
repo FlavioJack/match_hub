@@ -69,7 +69,7 @@ def main():
         elif sel_menu == "3":
             print("Elenco dei team presenti: ")
             for t in teams_register: 
-                print(teams_register[t])
+                print(t)
 
 
 
