@@ -75,6 +75,8 @@ class Match():
         self.team_a = team_a
         self.team_b = team_b
         self.status = MatchStatus.DA_INIZIARE
+    def get_name(self):
+        return self.name
     def get_date(self):
         return self.date
     def get_teams_names(self):
