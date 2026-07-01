@@ -36,6 +36,7 @@ def main():
 
         sel_menu = input("Seleziona il menu: ")
 
+        # CREATE PLAYERS
         if sel_menu == "1":
             player_name = input("Inserisci il nome del giocatore: ")
             while player_name.strip() == "":
@@ -45,6 +46,8 @@ def main():
             else:
                 registration(player_name, players_register, 1)
                 print(f"✅ Nome \"{player_name}\" inserito correttamente!")
+        
+        # CREATE TEAMS
         elif sel_menu == "2":
             team_name = input("Inserisci il nome del team: ")
             new_team = registration(team_name, teams_register, 2)
@@ -62,14 +65,45 @@ def main():
                 if sel_name in players_register.keys():
                     players_for_team.append(sel_name)
                 else: 
-                    print("Nome non presente tra quelli disponibili")
+                    print("❌ Nome non presente tra quelli disponibili, controlla maiuscole e minuscole.")
                 sel_name = input("Digita nome giocatore + Enter, altrimenti Enter per terminare: ").strip()
             for player in players_for_team:
                 new_team.add_player(players_register[player])
+        
+        # CREATE MATCH
         elif sel_menu == "3":
             print("Elenco dei team presenti: ")
             for t in teams_register: 
-                print(t)
+                print(teams_register[t])
+
+            team_a_name = ""
+            team_a = None
+            while team_a_name == "":
+                team_a_name = input("Inserisci nome team 1: ").strip()
+                if team_a_name in teams_register.keys() and team_a_name != "":
+                    team_a = teams_register[team_a_name]
+                    print(f"✅ Team {team_a_name} inserito correttamente!")
+                    break
+                else: 
+                    print("❌ Nome non presente tra quelli disponibili, controlla maiuscole e minuscole.")
+                    team_a_name = ""
+            
+            team_b_name = ""
+            team_b = None
+            while team_b_name == "":
+                team_b_name = input("Inserisci nome team 2: ").strip()
+                if team_b_name in teams_register.keys() and team_b_name != "":
+                    team_b = teams_register[team_b_name]
+                    print(f"✅ Team {team_b_name} inserito correttamente!")
+                    break
+                else: 
+                    print("❌ Nome non presente tra quelli disponibili, controlla maiuscole e minuscole.")
+                    team_b_name = ""
+            
+            new_match = Match(team_a, team_b)
+            matches_register[new_match.get_name()] = new_match
+            print(new_match)
+
 
 
 
