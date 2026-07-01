@@ -68,7 +68,7 @@ class Team():
     
     def __str__(self):
         l = self.get_stats()
-        return f" -- Team \"{self.get_name()}\", membri: {self.get_players()}, vittorie: {l[0]} sconfitte: {l[1]} pareggi: {l[2]};"
+        return f" -- Team \"{self.get_name()}\" - membri: {self.get_players()} - vittorie: {l[0]}, sconfitte: {l[1]}, pareggi: {l[2]};"
     
     
 
