@@ -25,6 +25,9 @@ class Player():
         self.win += n
     def add_draw(self, n):
         self.win += n
+    def __str__(self):
+        l = self.get_stats()
+        return f" -- Player \"{self.get_name()}, vittorie: {l[0]} sconfitte: {l[1]} pareggi: {l[2]}\""
 
 class Team():
     def __init__(self, name):
@@ -70,7 +73,7 @@ class Team():
 
 class Match():
     def __init__(self, team_a, team_b):
-        self.name = ""+team_a.get_name()+" vs "+team_b.get_name()
+        self.name = f"{team_a.get_name()} vs {team_b.get_name()}"
         self.date = datetime.date.today()
         self.team_a = team_a
         self.team_b = team_b
