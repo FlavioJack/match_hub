@@ -27,7 +27,7 @@ class Player():
         self.win += n
     def __str__(self):
         l = self.get_stats()
-        return f" -- Player \"{self.get_name()}, vittorie: {l[0]} sconfitte: {l[1]} pareggi: {l[2]}\""
+        return f" -- Player \"{self.get_name()}\", vittorie: {l[0]} sconfitte: {l[1]} pareggi: {l[2]};"
 
 class Team():
     def __init__(self, name):
