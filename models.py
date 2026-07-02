@@ -27,7 +27,7 @@ class Player():
         self.win += n
     def __str__(self):
         l = self.get_stats()
-        return f" -- Player \"{self.get_name()}\", vittorie: {l[0]} sconfitte: {l[1]} pareggi: {l[2]};"
+        return f" --> Player \"{self.get_name()}\", vittorie: {l[0]} sconfitte: {l[1]} pareggi: {l[2]};"
 
 class Team():
     def __init__(self, name):
@@ -68,7 +68,7 @@ class Team():
     
     def __str__(self):
         l = self.get_stats()
-        return f" -- Team \"{self.get_name()}\" - membri: {self.get_players()} - vittorie: {l[0]}, sconfitte: {l[1]}, pareggi: {l[2]};"
+        return f" --> Team \"{self.get_name()}\" - membri: {self.get_players()} - vittorie: {l[0]}, sconfitte: {l[1]}, pareggi: {l[2]};"
     
     
 
@@ -93,7 +93,7 @@ class Match():
     def get_status(self):
         return self.status.value
     def __str__(self):
-        return f" -- Match {self.get_status()} || {self.get_teams_names()[0]} {self.get_score()[0]} - {self.get_score()[1]} {self.get_teams_names()[1]} || {self.get_date()}."
+        return f" --> Match {self.get_status()} || {self.get_teams_names()[0]} {self.get_score()[0]} - {self.get_score()[1]} {self.get_teams_names()[1]} || {self.get_date()}."
 
     
     
