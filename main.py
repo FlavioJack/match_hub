@@ -28,6 +28,12 @@ def show_match_menu():
     print(" 1.Create Match")
     print(" 2.Show Match and Stats")
     print(" 3.Back to Main Menu")  
+
+def show_save_menu():
+    print("\n\n===== IMPORT/EXPORT FILE MENU =====")
+    print(" 1.Import file")
+    print(" 2.Export file")
+    print(" 3.Back to Main Menu")  
         
         
 
@@ -49,6 +55,7 @@ def main():
         print(" 1.Giocatori")
         print(" 2.Squadre")
         print(" 3.Partite")
+        print(" 4.Salvataggi")
 
         sel_menu = input("Seleziona il menu o premi Enter per uscire: ").strip()
 
@@ -171,6 +178,24 @@ def main():
                     break
                 else:
                     print("⚠️ Inserisci un valore tra 1 e 3")
+        
+        # MENU IMPORT/EXPORT FILE
+        elif sel_menu == "4":
+            while True:
+                show_save_menu()
+                submenu = input("Seleziona il sottomenu: ").strip()
+                # IMPORT FILE
+                if submenu == "1":
+                    print(" || IMPORTA FILE SALVATAGGIO || ")
+                # EXPORT FILE
+                elif submenu == "2":
+                    print(" || ESPORTA FILE SALVATAGGIO || ")
+                # BACK TO MAIN MENU
+                elif submenu == "3": 
+                    break
+                else:
+                    print("⚠️ Inserisci un valore tra 1 e 3")
+                
 
 
 
