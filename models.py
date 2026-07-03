@@ -8,13 +8,15 @@ class MatchStatus(Enum):
 
 class Player():
     def __init__(self, name):
-        self.name = name
+        self.set_name(name)
         self.win = 0
         self.lost = 0
         self.draws = 0
 
     def get_name(self):
         return self.name
+    def set_name(self, name):
+        self.name = name
     def get_stats(self):
         return [self.win, self.lost, self.draws]
     def reset_stats(self):
