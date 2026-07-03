@@ -44,6 +44,13 @@ def show_team_menu():
     print(" 3.Modify Team")
     print(" 4.Back to Main Menu")   
 
+def show_team_modify_menu():
+    print("\n\n===== TEAM -> MODIFY =====")
+    print(" 1.Change Name")
+    print(" 2.Reset Team's Stats")
+    print(" 3.Delete Team")
+    print(" 4.Back to Team Menu")  
+
 def show_match_menu():
     print("\n\n===== MATCH MENU =====")
     print(" 1.Create Match")
@@ -68,7 +75,6 @@ def main():
     teams_register = {}
     matches_register = {}
 
-  
     #match1 = Match(team_a, team_b)
    
     sel_menu = "0"
@@ -129,7 +135,6 @@ def main():
                                     print("Errore!")
                                 else:
                                     print(f"✅ Statistiche di \"{player_name}\" resettate correttamente!")
-                                
                             # DELETE PLAYER
                             elif submenu == "3":
                                 choice = input(f"Sei sicuro di voler eliminare il giocatore \"{player_name}\"? s/n: ").strip().lower()
@@ -188,6 +193,15 @@ def main():
                 # EDIT/DELETE TEAM
                 elif submenu == "3":
                     print(" || MODIFICA O ELIMINA SQUADRA || ")
+                    while True:
+                        team_name = input(ENTER_NAME_CANCEL).strip()
+                        if team_name == "":
+                            break
+                        elif team_name in teams_register:
+                            team = teams_register[team_name]
+                            show_team_modify_menu()
+                            submenu = input(SELECT_SUBMENU).strip()
+                            # CHANGE NAME
                 # BACK TO MAIN MENU
                 elif submenu == "4": 
                     break
