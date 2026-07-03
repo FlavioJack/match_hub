@@ -128,16 +128,19 @@ def main():
                                 except:
                                     print("Errore!")
                                 else:
-                                    print(f"Statistiche di \"{player_name}\" resettate correttamente!")
+                                    print(f"✅ Statistiche di \"{player_name}\" resettate correttamente!")
                                 
                             # DELETE PLAYER
                             elif submenu == "3":
-                                try:
-                                    players_register.pop(player_name)
-                                except:
-                                    print("Errore!")
-                                else:
-                                    print(f"✅ Giocatore \"{player_name}\" eliminato con successo!")
+                                choice = input(f"Sei sicuro di voler eliminare il giocatore \"{player_name}\"? s/n: ").strip().lower()
+                                if choice == "s":
+                                    try:
+                                        players_register.pop(player_name)
+                                    except:
+                                        print("Errore!")
+                                    else:
+                                        print(f"✅ Giocatore \"{player_name}\" eliminato con successo!")
+                                else: print("Operazione annullata!")
                             # RETURN TO NAME INSERTION
                             elif submenu == "4":
                                 continue
