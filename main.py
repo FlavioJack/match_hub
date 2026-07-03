@@ -128,7 +128,7 @@ def main():
                                 except:
                                     print("Errore!")
                                 else:
-                                    print("Statistiche di \"{player_name}\" resettate correttamente!")
+                                    print(f"Statistiche di \"{player_name}\" resettate correttamente!")
                                 
                             # DELETE PLAYER
                             elif submenu == "3":
@@ -137,7 +137,7 @@ def main():
                                 except:
                                     print("Errore!")
                                 else:
-                                    print(f"✅ Giocatore {player_name} eliminato con successo!")
+                                    print(f"✅ Giocatore \"{player_name}\" eliminato con successo!")
                             # RETURN TO NAME INSERTION
                             elif submenu == "4":
                                 continue
