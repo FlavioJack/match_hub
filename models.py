@@ -31,7 +31,7 @@ class Player():
 
 class Team():
     def __init__(self, name):
-        self.name = name
+        self.set_name(name)
         self.players = []
         self.score = 0
         self.win = 0
@@ -40,6 +40,8 @@ class Team():
 
     def get_name(self):
         return self.name
+    def set_name(self, name):
+        self.name = name
     def get_players(self):
         players_names = ", ".join(player.name for player in self.players)
         return players_names
