@@ -1,7 +1,6 @@
 from models import Player, Team, Match
 
-ENTER_NAME_EXIT = "Inserisci il nome del giocatore o premi Enter per tornare indietro: "
-ENTER_NAME_CANCEL = "Inserisci il nome del giocatore o premi Enter per annullare: "
+ENTER_NAME_CANCEL = "Inserisci il nome del giocatore + Enter o premi Enter per annullare/terminare: "
 ENTER_VAL_RANGE = "⚠️ Inserisci un valore tra 1 e 4"
 NAME_NOT_VALID = "❌ Nome non presente tra quelli disponibili, controlla maiuscole e minuscole."
 SELECT_SUBMENU = "Seleziona il sottomenu: "
@@ -18,51 +17,51 @@ def registration(name, register, regtype):
         
 def show_main_menu():
     print("\n\n########## MAIN MENU ##########")
-    print(" 1.Giocatori")
-    print(" 2.Squadre")
-    print(" 3.Partite")
-    print(" 4.Salvataggi")
+    print(" 1  -  Giocatori")
+    print(" 2  -  Squadre")
+    print(" 3  -  Partite")
+    print(" 4  -  Salvataggi")
 
 def show_player_menu():
-    print("\n\n===== PLAYER MENU =====")
-    print(" 1.Create Player")
-    print(" 2.Show Players and Stats")
-    print(" 3.Modify Player")
-    print(" 4.Back to Main Menu")      
+    print("\n\n===== MAIN MENU >> GIOCATORI =====")
+    print(" 1  -  Inserisci Giocatore")
+    print(" 2  -  Mostra Giocatori e loro Statistiche")
+    print(" 3  -  Modifica Giocatore")
+    print(" 4  -  Torna al Menu Principale")      
 
 def show_player_modify_menu():
-    print("\n\n===== PLAYER -> MODIFY =====")
-    print(" 1.Change Name")
-    print(" 2.Reset Player's Stats")
-    print(" 3.Delete Player")
-    print(" 4.Back to Player Menu")  
+    print("\n\n===== GIOCATORI >> MODIFICA GIOCATORE =====")
+    print(" 1  -  Cambia Nome")
+    print(" 2  -  Reset Statistiche Giocatore")
+    print(" 3  -  Elimina Giocatore")
+    print(" 4  -  Torna al Menu Giocatori")  
 
 def show_team_menu():
-    print("\n\n===== TEAM MENU =====")
-    print(" 1.Create Team")
-    print(" 2.Show Teams and Stats")
-    print(" 3.Modify Team")
-    print(" 4.Back to Main Menu")   
+    print("\n\n===== SQUADRE =====")
+    print(" 1  -  Inserisci Squadra")
+    print(" 2  -  Mostra Squadre e loro Statistiche")
+    print(" 3  -  Modifica Squadra")
+    print(" 4  -  Torna al Menu Principale")   
 
 def show_team_modify_menu():
-    print("\n\n===== TEAM -> MODIFY =====")
-    print(" 1.Change Name")
-    print(" 2.Reset Team's Stats")
-    print(" 3.Delete Team")
-    print(" 4.Back to Team Menu")  
+    print("\n\n===== SQUADRE >> MODIFICA SQUADRA =====")
+    print(" 1  -  Cambia Nome")
+    print(" 2  -  Reset Statistiche Squadra")
+    print(" 3  -  Elimina Squadra")
+    print(" 4  -  Torna al Menu Squadre")  
 
 def show_match_menu():
-    print("\n\n===== MATCH MENU =====")
-    print(" 1.Create Match")
-    print(" 2.Show Match and Stats")
-    print(" 3.Modify Match")
-    print(" 4.Back to Main Menu")  
+    print("\n\n===== PARTITA =====")
+    print(" 1  -  Inserisci Partita")
+    print(" 2  -  Mostra Partite e loro Statistiche")
+    print(" 3  -  Modifica Partite")
+    print(" 4  -  Torna al Menu Principale")  
 
 def show_save_menu():
-    print("\n\n===== IMPORT/EXPORT FILE MENU =====")
-    print(" 1.Import file")
-    print(" 2.Export file")
-    print(" 3.Back to Main Menu")  
+    print("\n\n===== IMPORTA/ESPORTA FILE SALVATAGGIO =====")
+    print(" 1  -  Importa file")
+    print(" 2  -  Esporta file")
+    print(" 3  -  Torna al Menu Principale")  
         
 
 
@@ -81,7 +80,7 @@ def main():
     while sel_menu.strip()!="":
         show_main_menu()
 
-        sel_menu = input("Seleziona il menu o premi Enter per uscire: ").strip()
+        sel_menu = input("Seleziona il numero del menu + Enter o premi Enter per uscire: ").strip()
 
         # MENU PLAYERS
         if sel_menu == "1":
@@ -90,9 +89,9 @@ def main():
                 submenu = input("Seleziona il sottomenu: ").strip()
                 # CREATE PLAYER
                 if submenu == "1":
-                    print(" || CREAZIONE GIOCATORI || ")
+                    print("\nCREAZIONE GIOCATORI ")
                     while True:
-                        player_name = input("Inserisci il nome del giocatore che vuoi aggiungere o premi Enter per uscire: ").strip()
+                        player_name = input(ENTER_NAME_CANCEL).strip()
                         if player_name not in players_register and player_name != "":
                             registration(player_name, players_register, 1)
                             print(f"✅ Nome \"{player_name}\" inserito correttamente!")
@@ -102,12 +101,12 @@ def main():
                             break
                 # SHOW PLAYERS STATS   
                 elif submenu == "2":
-                    print(" || ELENCO GIOCATORI E STATISTICHE || ")
+                    print("\nELENCO GIOCATORI E STATISTICHE ")
                     for name in players_register:
                         print(players_register[name])
                 # EDIT/DELETE PLAYER
                 elif submenu == "3":
-                    print(" || MODIFICA O ELIMINA GIOCATORE || ")
+                    print("\nMODIFICA O ELIMINA GIOCATORE ")
                     while True:
                         player_name = input(ENTER_NAME_CANCEL).strip()
                         if player_name == "":
@@ -148,7 +147,7 @@ def main():
                                 else: print("Operazione annullata!")
                             # RETURN TO NAME INSERTION
                             elif submenu == "4":
-                                continue
+                                break
                             else: print(ENTER_VAL_RANGE)
                         else: print(NAME_NOT_VALID)
                 # BACK TO MAIN MENU  
@@ -163,38 +162,39 @@ def main():
                 submenu = input("Seleziona il sottomenu: ").strip()
                 # CREATE TEAM
                 if submenu == "1":
-                    print(" || CREAZIONE SQUADRA || ")
+                    print("\nCREAZIONE SQUADRA ")
                     while True:
-                        team_name = input("Inserisci il nome dell squadra o premi Enter per uscire: ").strip()
+                        team_name = input("Inserisci il nome della squadra da creare + Enter o premi Enter per annullare/terminare: ").strip()
                         if team_name == "":
                             break
                         new_team = registration(team_name, teams_register, 2)
                         print("Giocatori disponibili: ", end="")
                         for player in players_register.keys():
                             print(player, end=" ")
-                        print("")
+                        print("\n")
                         # choose names, append to list and foreach list's element (player name) 
                         # pick from the player objects register and add to the team object
-                        print("Adesso aggiungi nomi di giocatori tra quelli disponibili.")
+                        print("Adesso aggiungi nomi di giocatori tra quelli disponibili da aggiungere alla squadra creata.")
                         players_for_team = []
-                        sel_name = input("Digita nome giocatore + Enter, altrimenti Enter per terminare: ").strip()
+                        sel_name = input(ENTER_NAME_CANCEL).strip()
                         while sel_name != "":
                             if sel_name in players_register.keys():
                                 players_for_team.append(sel_name)
                             else: print(NAME_NOT_VALID)
-                            sel_name = input("Digita nome giocatore + Enter, altrimenti Enter per terminare: ").strip()
+                            sel_name = input(ENTER_NAME_CANCEL).strip()
                         for player in players_for_team:
                             new_team.add_player(players_register[player])
+                        
                 # SHOW TEAMS STATS
                 elif submenu == "2":
-                    print(" || ELENCO SQUADRE E STATISTICHE || ")
+                    print("\nELENCO SQUADRE E STATISTICHE ")
                     for name in teams_register:
                         print(teams_register[name])
                 # EDIT/DELETE TEAM
                 elif submenu == "3":
-                    print(" || MODIFICA O ELIMINA SQUADRA || ")
+                    print("\nMODIFICA O ELIMINA SQUADRA ")
                     while True:
-                        team_name = input(ENTER_NAME_CANCEL).strip()
+                        team_name = input("Inserisci il nome della squadra + Enter o premi Enter per annullare/terminare: ").strip()
                         if team_name == "":
                             break
                         elif team_name in teams_register:
@@ -215,8 +215,8 @@ def main():
                 # CREATE MATCH
                 if submenu == "1":
                     while True:
-                        print(" || CREAZIONE PARTITE || ")
-                        choice = input("Premi 1 per l'elenco delle squadre presenti o premi Enter per uscire: ")
+                        print("\nCREAZIONE PARTITE ")
+                        choice = input("Premi 1 + Enter per l'elenco delle squadre presenti o premi Enter per annullare/terminare: ")
                         if choice == "":
                             break
                         else:
@@ -247,12 +247,12 @@ def main():
                             print(f"✅ Nuova partita creata {new_match}")
 
                 elif submenu == "2":
-                    print(" || ELENCO PARTITE E STATISTICHE || ")
+                    print("\nELENCO PARTITE E STATISTICHE ")
                     for name in matches_register:
                         print(matches_register[name])
                 # EDIT/DELETE MATCH
                 elif submenu == "3":
-                    print(" || MODIFICA O ELIMINA PARTITA || ")
+                    print("\nMODIFICA O ELIMINA PARTITA ")
                 # BACK TO MAIN MENU
                 elif submenu == "4": 
                     break
@@ -265,10 +265,10 @@ def main():
                 submenu = input("Seleziona il sottomenu: ").strip()
                 # IMPORT FILE
                 if submenu == "1":
-                    print(" || IMPORTA FILE SALVATAGGIO || ")
+                    print("\nIMPORTA FILE SALVATAGGIO ")
                 # EXPORT FILE
                 elif submenu == "2":
-                    print(" || ESPORTA FILE SALVATAGGIO || ")
+                    print("\nESPORTA FILE SALVATAGGIO ")
                 # BACK TO MAIN MENU
                 elif submenu == "3": 
                     break
