@@ -1,6 +1,7 @@
 from models import Player, Team, Match
 
 ENTER_NAME_CANCEL = "Inserisci il nome del giocatore + Enter o premi Enter per annullare/terminare: "
+ENTER_NEW_NAME = "Inserisci il nuovo nome: "
 ENTER_VAL_RANGE = "⚠️ Inserisci un valore tra 1 e 4"
 NAME_NOT_VALID = "❌ Nome non presente tra quelli disponibili, controlla maiuscole e minuscole."
 SELECT_SUBMENU = "Seleziona il sottomenu: "
@@ -117,7 +118,7 @@ def main():
                             submenu = input(SELECT_SUBMENU).strip()
                             # CHANGE NAME
                             if submenu == "1":
-                                new_name = input("Inserisci il nuovo nome: ")
+                                new_name = input(ENTER_NEW_NAME)
                                 try:
                                     player.set_name(new_name)
                                     players_register.pop(player_name)
@@ -202,6 +203,17 @@ def main():
                             show_team_modify_menu()
                             submenu = input(SELECT_SUBMENU).strip()
                             # CHANGE NAME
+                            if submenu == "1":
+                                new_name = input(ENTER_NEW_NAME)
+                                try:
+                                    team.set_name(new_name)
+                                    teams_register.pop(team_name)
+                                    teams_register[new_name] = team
+                                except:
+                                    print("Errore!")
+                                else:
+                                    print(f"✅ Nome \"{team_name}\" -> \"{new_name}\" modificato correttamente!")
+                        else: print(NAME_NOT_VALID)
                 # BACK TO MAIN MENU
                 elif submenu == "4": 
                     break
