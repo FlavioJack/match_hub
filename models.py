@@ -42,9 +42,11 @@ class Team():
         return self.name
     def set_name(self, name):
         self.name = name
-    def get_players(self):
-        players_names = ", ".join(player.name for player in self.players)
+    def get_printed_players(self):
+        players_names = ", ".join(player.name for player in self.get_players())
         return players_names
+    def get_players(self):
+        return self.players
     def reset_players(self):
         self.players.clear()
     def add_player(self, player):
@@ -70,7 +72,7 @@ class Team():
     
     def __str__(self):
         l = self.get_stats()
-        return f" --> Team \"{self.get_name()}\" - membri: {self.get_players()} - vittorie: {l[0]}, sconfitte: {l[1]}, pareggi: {l[2]};"
+        return f" --> Team \"{self.get_name()}\" - membri: {self.get_printed_players()} - vittorie: {l[0]}, sconfitte: {l[1]}, pareggi: {l[2]};"
     
     
 
