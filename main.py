@@ -5,6 +5,7 @@ ENTER_NEW_NAME = "Inserisci il nuovo nome: "
 ENTER_VAL_RANGE = "⚠️ Inserisci un valore tra 1 e 4"
 NAME_NOT_VALID = "❌ Nome non presente tra quelli disponibili, controlla maiuscole e minuscole."
 SELECT_SUBMENU = "Seleziona il sottomenu: "
+PLAYERS_ADDED_OK = "✅ Giocatori inseriti correttamente!"
 
 def registration(name, register, regtype):
     if regtype == 1:
@@ -57,9 +58,10 @@ def show_team_modify_menu():
     print("\n\n===== SQUADRE >> MODIFICA SQUADRA =====")
     print(" 1  -  Cambia Nome")
     print(" 2  -  Reset Statistiche Squadra")
-    print(" 3  -  Rimuovi Giocatore da Squadra")
-    print(" 4  -  Elimina Squadra")
-    print(" 5  -  Torna al Menu Squadre")  
+    print(" 3  -  Aggiungi Giocatore da Squadra")
+    print(" 4  -  Rimuovi Giocatore da Squadra")
+    print(" 5  -  Elimina Squadra")
+    print(" 6  -  Torna al Menu Squadre")  
 
 def show_match_menu():
     print("\n\n===== PARTITA =====")
@@ -193,8 +195,11 @@ def main():
                                 players_for_team.append(sel_name)
                             else: print(NAME_NOT_VALID)
                             sel_name = input(ENTER_NAME_CANCEL).strip()
-                        for player in players_for_team:
-                            new_team.add_player(players_register[player])
+                        try:
+                            for player in players_for_team:
+                                new_team.add_player(players_register[player])
+                        except: print("Errore!")
+                        else: print(PLAYERS_ADDED_OK)
                         
                 # SHOW TEAMS STATS
                 elif submenu == "2":
@@ -231,8 +236,33 @@ def main():
                                     print("Errore!")
                                 else:
                                     print(f"✅ Statistiche di \"{team_name}\" resettate correttamente!")
-                            # DELETE PLAYER FROM TEAM
+                            # ADD PLAYER TO TEAM
                             elif submenu == "3":
+                                print("Giocatori disponibili: ", end="")
+                                for player in players_register.keys():
+                                    print(player, end=" ")
+                                print("\n")
+                                print("Adesso aggiungi nomi di giocatori tra quelli disponibili da aggiungere alla squadra.")
+                                
+                                players_for_team = []
+                                sel_name = input(ENTER_NAME_CANCEL).strip()
+                                while sel_name != "":
+                                    if sel_name in players_register:
+                                        players_list = team.get_players()
+                                        player = players_register[sel_name]
+                                        if player not in players_list:
+                                            players_for_team.append(sel_name)
+                                            print("Nome valido.")
+                                        else: print("Giocatore già in squadra.")
+                                    else: print(NAME_NOT_VALID)
+                                    sel_name = input(ENTER_NAME_CANCEL).strip()
+                                try:
+                                    for player in players_for_team:
+                                        new_team.add_player(players_register[player])
+                                except: print("Errore!")
+                                else: print(PLAYERS_ADDED_OK)
+                            # DELETE PLAYER FROM TEAM
+                            elif submenu == "4":
                                 player_name = input("Inserisci il nome del giocatore da rimuovere + Enter o premi Enter per annullare/terminare: ").strip()
                                 # get player func
                                 if player_name in players_register:
@@ -250,7 +280,7 @@ def main():
                                     else: print("Giocatore non presente in squadra!")
                                 else: print(NAME_NOT_VALID)
                             # DELETE TEAM
-                            elif submenu == "4":
+                            elif submenu == "5":
                                 choice = input(f"Sei sicuro di voler eliminare la squadra \"{team_name}\"? s/n: ").strip().lower()
                                 if choice == "s":
                                     try:
@@ -261,7 +291,7 @@ def main():
                                         print(f"✅ Giocatore \"{player_name}\" eliminato con successo!")
                                 else: print("Operazione annullata!")
                             # RETURN TO TEAM MENU
-                            elif submenu == "5":
+                            elif submenu == "6":
                                 break
                             else: print(ENTER_VAL_RANGE)
                         else: print(NAME_NOT_VALID)
