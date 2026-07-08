@@ -66,6 +66,14 @@ def show_match_menu():
     print(" 2  -  Mostra Partite e loro Statistiche")
     print(" 3  -  Modifica Partite")
 
+def show_match_modify_menu():
+    print("\n\n===== PARTITE >> MODIFICA PARTITA =====")
+    print(" 1  -  Cambia Nome")
+    print(" 2  -  Reset Statistiche Squadra")
+    print(" 3  -  Aggiungi Giocatore da Squadra")
+    print(" 4  -  Rimuovi Giocatore da Squadra")
+    print(" 5  -  Elimina Squadra")
+
 def show_save_menu():
     print("\n\n===== IMPORTA/ESPORTA FILE SALVATAGGIO =====")
     print(" 1  -  Importa file")
@@ -329,14 +337,25 @@ def main():
                             print("Errore!")
                         else:
                             print(f"✅ Nuova partita creata {new_match}")
-
+                # SHOW MATCH STATS
                 elif submenu == "2":
                     print("\nELENCO PARTITE E STATISTICHE ")
                     for name in matches_register:
                         print(matches_register[name])
                 # EDIT/DELETE MATCH
                 elif submenu == "3":
-                    print("\nMODIFICA O ELIMINA PARTITA ")
+                    while True:
+                        print("\nMODIFICA O ELIMINA PARTITA ")
+                        #team_name = input("Inserisci il nome della squadra da modificare + Enter o premi Enter per annullare/terminare: ").strip()
+                        #if team_name == "":
+                            #break
+                        #elif team_name in teams_register:
+                            #team = teams_register[team_name]
+                            #show_match_modify_menu()
+                            #submenu = input(SELECT_SUBMENU).strip()
+                            # CHANGE NAME
+                        
+                    
                 # BACK TO MAIN MENU
                 elif submenu == "": 
                     break
