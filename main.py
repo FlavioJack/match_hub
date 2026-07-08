@@ -1,10 +1,10 @@
 from models import Player, Team, Match
 
-ENTER_NAME_CANCEL = "Inserisci il nome del giocatore + Enter o premi Enter per annullare/terminare: "
+ENTER_NAME_CANCEL = "Inserisci il nome del giocatore o premi Enter per annullare/terminare: "
 ENTER_NEW_NAME = "Inserisci il nuovo nome: "
 ENTER_VAL_RANGE = "⚠️ Inserisci un valore tra 1 e 4"
 NAME_NOT_VALID = "❌ Nome non presente tra quelli disponibili, controlla maiuscole e minuscole."
-SELECT_SUBMENU = "Seleziona il sottomenu: "
+SELECT_SUBMENU = "Seleziona il sottomenu o premi Enter per tornare indietro: "
 PLAYERS_ADDED_OK = "✅ Giocatori inseriti correttamente!"
 
 def registration(name, register, regtype):
@@ -35,25 +35,22 @@ def show_main_menu():
     print(" 5  -  Esci")
 
 def show_player_menu():
-    print("\n\n===== MAIN MENU >> GIOCATORI =====")
+    print("\n\n===== GIOCATORI =====")
     print(" 1  -  Inserisci Giocatore")
     print(" 2  -  Mostra Giocatori e loro Statistiche")
-    print(" 3  -  Modifica Giocatore")
-    print(" 4  -  Torna al Menu Principale")      
+    print(" 3  -  Modifica Giocatore") 
 
 def show_player_modify_menu():
     print("\n\n===== GIOCATORI >> MODIFICA GIOCATORE =====")
     print(" 1  -  Cambia Nome")
     print(" 2  -  Reset Statistiche Giocatore")
     print(" 3  -  Elimina Giocatore")
-    print(" 4  -  Torna al Menu Giocatori")  
 
 def show_team_menu():
     print("\n\n===== SQUADRE =====")
     print(" 1  -  Inserisci Squadra")
     print(" 2  -  Mostra Squadre e loro Statistiche")
     print(" 3  -  Modifica Squadra")
-    print(" 4  -  Torna al Menu Principale")   
 
 def show_team_modify_menu():
     print("\n\n===== SQUADRE >> MODIFICA SQUADRA =====")
@@ -62,20 +59,17 @@ def show_team_modify_menu():
     print(" 3  -  Aggiungi Giocatore da Squadra")
     print(" 4  -  Rimuovi Giocatore da Squadra")
     print(" 5  -  Elimina Squadra")
-    print(" 6  -  Torna al Menu Squadre")  
 
 def show_match_menu():
     print("\n\n===== PARTITE =====")
     print(" 1  -  Inserisci Partita")
     print(" 2  -  Mostra Partite e loro Statistiche")
     print(" 3  -  Modifica Partite")
-    print(" 4  -  Torna al Menu Principale")  
 
 def show_save_menu():
     print("\n\n===== IMPORTA/ESPORTA FILE SALVATAGGIO =====")
     print(" 1  -  Importa file")
     print(" 2  -  Esporta file")
-    print(" 3  -  Torna al Menu Principale")  
         
 
 
@@ -96,7 +90,7 @@ def main():
         if sel_menu == "1":
             while True:
                 show_player_menu()
-                submenu = input("Seleziona il sottomenu: ").strip()
+                submenu = input(SELECT_SUBMENU).strip()
                 # CREATE PLAYER
                 if submenu == "1":
                     print("\nCREAZIONE GIOCATORI ")
@@ -161,7 +155,7 @@ def main():
                             else: print(ENTER_VAL_RANGE)
                         else: print(NAME_NOT_VALID)
                 # BACK TO MAIN MENU  
-                elif submenu == "4": 
+                elif submenu == "": 
                     break
                 else: print(ENTER_VAL_RANGE)
 
@@ -169,7 +163,7 @@ def main():
         elif sel_menu == "2":
             while True:
                 show_team_menu()
-                submenu = input("Seleziona il sottomenu: ").strip()
+                submenu = input(SELECT_SUBMENU).strip()
                 # CREATE TEAM
                 if submenu == "1":
                     print("\nCREAZIONE SQUADRA ")
@@ -293,7 +287,7 @@ def main():
                             else: print(ENTER_VAL_RANGE)
                         else: print(NAME_NOT_VALID)
                 # BACK TO MAIN MENU
-                elif submenu == "4": 
+                elif submenu == "": 
                     break
                 else: print(ENTER_VAL_RANGE)
         
@@ -301,7 +295,7 @@ def main():
         elif sel_menu == "3":
             while True:
                 show_match_menu()
-                submenu = input("Seleziona il sottomenu: ").strip()
+                submenu = input(SELECT_SUBMENU).strip()
                 # CREATE MATCH
                 if submenu == "1":
                     while True:
@@ -344,7 +338,7 @@ def main():
                 elif submenu == "3":
                     print("\nMODIFICA O ELIMINA PARTITA ")
                 # BACK TO MAIN MENU
-                elif submenu == "4": 
+                elif submenu == "": 
                     break
                 else: print(ENTER_VAL_RANGE)
         
@@ -352,7 +346,7 @@ def main():
         elif sel_menu == "4":
             while True:
                 show_save_menu()
-                submenu = input("Seleziona il sottomenu: ").strip()
+                submenu = input(SELECT_SUBMENU).strip()
                 # IMPORT FILE
                 if submenu == "1":
                     print("\nIMPORTA FILE SALVATAGGIO ")
@@ -360,7 +354,7 @@ def main():
                 elif submenu == "2":
                     print("\nESPORTA FILE SALVATAGGIO ")
                 # BACK TO MAIN MENU
-                elif submenu == "3": 
+                elif submenu == "": 
                     break
                 else:
                     print("⚠️ Inserisci un valore tra 1 e 3")
