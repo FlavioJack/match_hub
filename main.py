@@ -32,6 +32,7 @@ def show_main_menu():
     print(" 2  -  Squadre")
     print(" 3  -  Partite")
     print(" 4  -  Salvataggi")
+    print(" 5  -  Esci")
 
 def show_player_menu():
     print("\n\n===== MAIN MENU >> GIOCATORI =====")
@@ -64,7 +65,7 @@ def show_team_modify_menu():
     print(" 6  -  Torna al Menu Squadre")  
 
 def show_match_menu():
-    print("\n\n===== PARTITA =====")
+    print("\n\n===== PARTITE =====")
     print(" 1  -  Inserisci Partita")
     print(" 2  -  Mostra Partite e loro Statistiche")
     print(" 3  -  Modifica Partite")
@@ -87,14 +88,10 @@ def main():
     teams_register = {}
     matches_register = {}
 
-    #match1 = Match(team_a, team_b)
-   
-    sel_menu = "0"
-    while sel_menu.strip()!="":
+    while True:
         show_main_menu()
-
-        sel_menu = input("Seleziona il numero del menu + Enter o premi Enter per uscire: ").strip()
-
+        sel_menu = input("Seleziona il numero del menu: ").strip()
+        
         # MENU PLAYERS
         if sel_menu == "1":
             while True:
@@ -308,14 +305,14 @@ def main():
                 # CREATE MATCH
                 if submenu == "1":
                     while True:
-                        print("\nCREAZIONE PARTITE ")
+                        print("\nCREAZIONE PARTITE")
                         choice = input("Premi 1 + Enter per l'elenco delle squadre presenti o premi Enter per annullare/terminare: ")
                         if choice == "":
                             break
                         else:
                             for t in teams_register: 
                                 print(teams_register[t])
- 
+
                         while True:
                             team_a_name = input("Inserisci nome squadra 1: ").strip()
                             if team_a_name in teams_register and team_a_name != "":
@@ -367,6 +364,11 @@ def main():
                     break
                 else:
                     print("⚠️ Inserisci un valore tra 1 e 3")
+        
+        elif sel_menu == "5":
+            break
+
+        else: print(ENTER_VAL_RANGE)
                 
 
 
