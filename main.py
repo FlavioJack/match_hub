@@ -6,6 +6,8 @@ ENTER_VAL_RANGE = "⚠️ Inserisci un valore tra 1 e 4"
 NAME_NOT_VALID = "❌ Nome non presente tra quelli disponibili, controlla maiuscole e minuscole."
 SELECT_SUBMENU = "Seleziona il sottomenu o premi Enter per tornare indietro: "
 PLAYERS_ADDED_OK = "✅ Giocatori inseriti correttamente!"
+ACTION_EXECUTED_NOERR = "✅ Azione eseguita correttamente!"
+CANCELLED_OPERATION = "Operazione annullata!"
 
 def registration(name, register, regtype):
     if regtype == 1:
@@ -64,15 +66,8 @@ def show_match_menu():
     print("\n\n===== PARTITE =====")
     print(" 1  -  Inserisci Partita")
     print(" 2  -  Mostra Partite e loro Statistiche")
-    print(" 3  -  Modifica Partite")
+    print(" 3  -  Elimina Partita")
 
-def show_match_modify_menu():
-    print("\n\n===== PARTITE >> MODIFICA PARTITA =====")
-    print(" 1  -  Cambia Nome")
-    print(" 2  -  Reset Statistiche Squadra")
-    print(" 3  -  Aggiungi Giocatore da Squadra")
-    print(" 4  -  Rimuovi Giocatore da Squadra")
-    print(" 5  -  Elimina Squadra")
 
 def show_save_menu():
     print("\n\n===== IMPORTA/ESPORTA FILE SALVATAGGIO =====")
@@ -88,7 +83,7 @@ def main():
 
     players_register = {}
     teams_register = {}
-    matches_register = {}
+    matches_register = []
 
     while True:
         show_main_menu()
@@ -156,7 +151,7 @@ def main():
                                         print("Errore!")
                                     else:
                                         print(f"✅ Giocatore \"{player_name}\" eliminato con successo!")
-                                else: print("Operazione annullata!")
+                                else: print(CANCELLED_OPERATION)
                             # RETURN TO NAME INSERTION
                             elif submenu == "4":
                                 break
@@ -275,7 +270,7 @@ def main():
                                                 print("Errore!")
                                             else:
                                                 print(f"✅ Giocatore \"{player_name}\" eliminato dalla squadra con successo!")
-                                        else: print("Operazione annullata!")
+                                        else: print(CANCELLED_OPERATION)
                                     else: print("Giocatore non presente in squadra!")
                                 else: print(NAME_NOT_VALID)
                             # DELETE TEAM
@@ -288,7 +283,7 @@ def main():
                                         print("Errore!")
                                     else:
                                         print(f"✅ Giocatore \"{player_name}\" eliminato con successo!")
-                                else: print("Operazione annullata!")
+                                else: print(CANCELLED_OPERATION)
                             # RETURN TO TEAM MENU
                             elif submenu == "6":
                                 break
@@ -308,7 +303,7 @@ def main():
                 if submenu == "1":
                     while True:
                         print("\nCREAZIONE PARTITE")
-                        choice = input("Premi 1 + Enter per l'elenco delle squadre presenti o premi Enter per annullare/terminare: ")
+                        choice = input("Premi 1 per l'elenco delle squadre presenti o premi Enter per annullare/terminare: ")
                         if choice == "":
                             break
                         else:
@@ -332,7 +327,8 @@ def main():
                             else: print(NAME_NOT_VALID)
                         try:
                             new_match = Match(team_a, team_b)
-                            matches_register[new_match.get_name()] = new_match
+                            matches_register.append(new_match)
+                            #matches_register[new_match.get_name()] = new_match # only for dict
                         except:
                             print("Errore!")
                         else:
@@ -341,21 +337,34 @@ def main():
                 elif submenu == "2":
                     print("\nELENCO PARTITE E STATISTICHE ")
                     for name in matches_register:
-                        print(matches_register[name])
-                # EDIT/DELETE MATCH
+                        print(name) # matches_register[name] for dict insert in print
+                # DELETE MATCH
                 elif submenu == "3":
                     while True:
-                        print("\nMODIFICA O ELIMINA PARTITA ")
-                        #team_name = input("Inserisci il nome della squadra da modificare + Enter o premi Enter per annullare/terminare: ").strip()
-                        #if team_name == "":
-                            #break
-                        #elif team_name in teams_register:
-                            #team = teams_register[team_name]
-                            #show_match_modify_menu()
-                            #submenu = input(SELECT_SUBMENU).strip()
-                            # CHANGE NAME
-                        
-                    
+                        print("\nELIMINA PARTITA ")
+                        print("Elenco partite")
+                        counter = 0
+                        for match in matches_register:
+                            counter += 1
+                            print(f"{counter}. {match}") #matches_register[match] for dict insert in print
+                        match_sel = input("Inserisci il numero della partita da cancellare o premi Enter per annullare/terminare: ").strip() 
+                        if match_sel == "":
+                            break
+                        if match_sel.isdigit():
+                            match_number = int(match_sel)
+                            print(match_number)
+                        else:
+                            print("⚠️ Hai inserito un valore non consentito. Solo i numeri sono ammessi.")
+                            break
+                        if match_number <= counter and match_number > 0:
+                            match_to_delete = matches_register[match_number-1]
+                            choice = input(f"Sei sicuro di voler eliminare la partita \"{match_to_delete.get_name()}\" del {match_to_delete.get_date()}? s/n: ").strip().lower()
+                            if choice == "s":
+                                try: matches_register.remove(match_to_delete) #matches_register.pop(match_to_delete)
+                                except: print("Errore!")
+                                else: print(f"✅ Partita \"{match_to_delete}\" eliminata con successo!")
+                            else: print(CANCELLED_OPERATION)
+                        else: print("⚠️ Inserisci un numero nel range della lista!")
                 # BACK TO MAIN MENU
                 elif submenu == "": 
                     break
