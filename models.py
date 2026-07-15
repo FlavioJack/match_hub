@@ -8,8 +8,8 @@ class MatchStatus(Enum):
 
 class Player():
     def __init__(self, name):
-        self.set_name(name)
-        self.reset_stats()
+        self.name = name
+        self.win = self.lost = self.draws = 0
 
     def get_name(self):
         return self.name
@@ -31,7 +31,7 @@ class Player():
 
 class Team():
     def __init__(self, name):
-        self.set_name(name)
+        self.name = name
         self.players = []
         self.win = 0
         self.lost = 0
@@ -70,13 +70,13 @@ class Team():
     
 
 class Match():
-    def __init__(self, team_a, team_b):
+    def __init__(self, team_a, team_b, score_a, score_b):
         self.name = f"{team_a.get_name()} vs {team_b.get_name()}"
         self.date = datetime.date.today()
         self.team_a = team_a
         self.team_b = team_b
-        self.score_a = 0
-        self.score_b = 0
+        self.score_a = score_a
+        self.score_b = score_b
         self.status = MatchStatus.DA_INIZIARE
     def get_name(self):
         return self.name
