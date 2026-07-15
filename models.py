@@ -33,7 +33,6 @@ class Team():
     def __init__(self, name):
         self.set_name(name)
         self.players = []
-        self.score = 0
         self.win = 0
         self.lost = 0
         self.draws = 0
@@ -53,12 +52,6 @@ class Team():
         self.players.append(player)
     def remove_player(self, player):
         self.players.remove(player)
-    def get_score(self):
-        return self.score
-    def set_score(self, score):
-        self.score = score
-    def add_score(self, score):
-        self.score += score
     def get_stats(self):
         return [self.win, self.lost, self.draws]
     def reset_stats(self):
@@ -82,6 +75,8 @@ class Match():
         self.date = datetime.date.today()
         self.team_a = team_a
         self.team_b = team_b
+        self.score_a = 0
+        self.score_b = 0
         self.status = MatchStatus.DA_INIZIARE
     def get_name(self):
         return self.name
@@ -90,10 +85,10 @@ class Match():
     def get_teams_names(self):
         return [self.team_a.get_name(), self.team_b.get_name()]
     def get_score(self):
-        return [self.team_a.get_score(), self.team_b.get_score()]
+        return [self.score_a, self.score_b]
     def add_score(self, score_a, score_b):
-        self.team_a.add_score(score_a)
-        self.team_b.add_score(score_b)
+        self.score_a += score_a
+        self.score_b += score_b
     def get_status(self):
         return self.status.value
     def __str__(self):
