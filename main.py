@@ -3,6 +3,7 @@ from models import Player, Team, Match
 ENTER_NAME_CANCEL = "Inserisci il nome del giocatore o premi Enter per annullare/terminare: "
 ENTER_NEW_NAME = "Inserisci il nuovo nome: "
 ENTER_VAL_RANGE = "⚠️ Inserisci un valore tra 1 e 4"
+VALUE_ERR_NUM = "⚠️ Hai inserito un valore non consentito. Solo i numeri sono ammessi."
 NAME_NOT_VALID = "❌ Nome non presente tra quelli disponibili, controlla maiuscole e minuscole."
 SELECT_SUBMENU = "Seleziona il sottomenu o premi Enter per tornare indietro: "
 PLAYERS_ADDED_OK = "✅ Giocatori inseriti correttamente!"
@@ -325,8 +326,17 @@ def main():
                                 print(f"✅ Squadra {team_b_name} inserita correttamente!")
                                 break
                             else: print(NAME_NOT_VALID)
+                        
+                        while True:
+                            try:
+                                score_a = int(input(f"Inserisci il punteggio di {team_a_name}: "))
+                                score_b = int(input(f"Inserisci il punteggio di {team_b_name}: "))
+                                break
+                            except ValueError:
+                                print(VALUE_ERR_NUM)
+
                         try:
-                            new_match = Match(team_a, team_b)
+                            new_match = Match(team_a, team_b, score_a, score_b)
                             matches_register.append(new_match)
                             #matches_register[new_match.get_name()] = new_match # only for dict
                         except:
@@ -354,7 +364,7 @@ def main():
                             match_number = int(match_sel)
                             print(match_number)
                         else:
-                            print("⚠️ Hai inserito un valore non consentito. Solo i numeri sono ammessi.")
+                            print(VALUE_ERR_NUM)
                             break
                         if match_number <= counter and match_number > 0:
                             match_to_delete = matches_register[match_number-1]
