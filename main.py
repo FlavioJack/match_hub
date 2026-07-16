@@ -1,11 +1,11 @@
 from models import Player, Team, Match
 
+SELECT_SUBMENU = "Seleziona il sottomenu o premi Enter per tornare indietro: "
 ENTER_NAME_CANCEL = "Inserisci il nome del giocatore o premi Enter per annullare/terminare: "
 ENTER_NEW_NAME = "Inserisci il nuovo nome: "
 VAL_RANGE_ERR = "⚠️ Il valore deve essere compreso tra 1 e 4."
-VALUE_ERR_NUM = "⚠️ Hai inserito un valore non consentito. Solo i numeri sono ammessi."
+VAL_TYPE_ERR = "⚠️ Hai inserito un valore non consentito. Solo i numeri sono ammessi."
 NAME_NOT_VALID = "❌ Nome non presente tra quelli disponibili, controlla maiuscole e minuscole."
-SELECT_SUBMENU = "Seleziona il sottomenu o premi Enter per tornare indietro: "
 PLAYERS_ADDED_OK = "✅ Giocatori inseriti correttamente!"
 ACTION_EXECUTED_NOERR = "✅ Azione eseguita correttamente!"
 CANCELLED_OPERATION = "Operazione annullata!"
@@ -333,7 +333,7 @@ def main():
                                 score_b = int(input(f"Inserisci il punteggio di {team_b_name}: "))
                                 break
                             except ValueError:
-                                print(VALUE_ERR_NUM)
+                                print(VAL_TYPE_ERR)
 
                         try:
                             new_match = Match(team_a, team_b, score_a, score_b)
@@ -364,7 +364,7 @@ def main():
                             match_number = int(match_sel)
                             print(match_number)
                         else:
-                            print(VALUE_ERR_NUM)
+                            print(VAL_TYPE_ERR)
                             break
                         if match_number <= counter and match_number > 0:
                             match_to_delete = matches_register[match_number-1]
