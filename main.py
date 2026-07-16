@@ -3,8 +3,8 @@ from models import Player, Team, Match
 SELECT_SUBMENU = "Seleziona il sottomenu o premi Enter per tornare indietro: "
 ENTER_NAME_CANCEL = "Inserisci il nome del giocatore o premi Enter per annullare/terminare: "
 ENTER_NEW_NAME = "Inserisci il nuovo nome: "
-VAL_RANGE_ERR = "⚠️ Il valore deve essere compreso tra 1 e 4."
-VAL_TYPE_ERR = "⚠️ Hai inserito un valore non consentito. Solo i numeri sono ammessi."
+VAL_RANGE_ERR = "⚠️ Il valore deve essere compreso nel range."
+VAL_TYPE_ERR = "⚠️ Hai inserito un valore non consentito."
 NAME_NOT_VALID = "❌ Nome non presente tra quelli disponibili, controlla maiuscole e minuscole."
 PLAYERS_ADDED_OK = "✅ Giocatori inseriti correttamente!"
 ACTION_EXECUTED_NOERR = "✅ Azione eseguita correttamente!"
@@ -373,8 +373,9 @@ def main():
                                 try: matches_register.remove(match_to_delete) #matches_register.pop(match_to_delete)
                                 except: print("Errore!")
                                 else: print(f"✅ Partita \"{match_to_delete}\" eliminata con successo!")
-                            else: print(CANCELLED_OPERATION)
-                        else: print("⚠️ Inserisci un numero nel range della lista!")
+                            elif choice == "no": print(CANCELLED_OPERATION)
+                            else: print(VAL_TYPE_ERR)
+                        else: print(VAL_RANGE_ERR)
                 # BACK TO MAIN MENU
                 elif submenu == "": 
                     break
@@ -395,7 +396,7 @@ def main():
                 elif submenu == "": 
                     break
                 else:
-                    print("⚠️ Inserisci un valore tra 1 e 3")
+                    print(VAL_RANGE_ERR)
         
         elif sel_menu == "5":
             break
