@@ -2,7 +2,7 @@ from models import Player, Team, Match
 
 ENTER_NAME_CANCEL = "Inserisci il nome del giocatore o premi Enter per annullare/terminare: "
 ENTER_NEW_NAME = "Inserisci il nuovo nome: "
-ENTER_VAL_RANGE = "⚠️ Inserisci un valore tra 1 e 4"
+VAL_RANGE_ERR = "⚠️ Il valore deve essere compreso tra 1 e 4."
 VALUE_ERR_NUM = "⚠️ Hai inserito un valore non consentito. Solo i numeri sono ammessi."
 NAME_NOT_VALID = "❌ Nome non presente tra quelli disponibili, controlla maiuscole e minuscole."
 SELECT_SUBMENU = "Seleziona il sottomenu o premi Enter per tornare indietro: "
@@ -156,12 +156,12 @@ def main():
                             # RETURN TO NAME INSERTION
                             elif submenu == "4":
                                 break
-                            else: print(ENTER_VAL_RANGE)
+                            else: print(VAL_RANGE_ERR)
                         else: print(NAME_NOT_VALID)
                 # BACK TO MAIN MENU  
                 elif submenu == "": 
                     break
-                else: print(ENTER_VAL_RANGE)
+                else: print(VAL_RANGE_ERR)
 
         # MENU TEAMS
         elif sel_menu == "2":
@@ -288,12 +288,12 @@ def main():
                             # RETURN TO TEAM MENU
                             elif submenu == "6":
                                 break
-                            else: print(ENTER_VAL_RANGE)
+                            else: print(VAL_RANGE_ERR)
                         else: print(NAME_NOT_VALID)
                 # BACK TO MAIN MENU
                 elif submenu == "": 
                     break
-                else: print(ENTER_VAL_RANGE)
+                else: print(VAL_RANGE_ERR)
         
         # MENU MATCH
         elif sel_menu == "3":
@@ -378,7 +378,7 @@ def main():
                 # BACK TO MAIN MENU
                 elif submenu == "": 
                     break
-                else: print(ENTER_VAL_RANGE)
+                else: print(VAL_RANGE_ERR)
         
         # MENU IMPORT/EXPORT FILE
         elif sel_menu == "4":
@@ -400,7 +400,7 @@ def main():
         elif sel_menu == "5":
             break
 
-        else: print(ENTER_VAL_RANGE)
+        else: print(VAL_RANGE_ERR)
                 
 
 
