@@ -19,12 +19,12 @@ class Player():
         return [self.win, self.lost, self.draws]
     def reset_stats(self):
         self.win = self.lost = self.draws = 0
-    def add_win(self, n):
-        self.win += n
-    def add_lost(self, n):
-        self.win += n
-    def add_draw(self, n):
-        self.win += n
+    def add_win(self):
+        self.win += 1
+    def add_lost(self):
+        self.win += 1
+    def add_draw(self):
+        self.win += 1
     def __str__(self):
         l = self.get_stats()
         return f" --> Player \"{self.get_name()}\", vittorie: {l[0]} sconfitte: {l[1]} pareggi: {l[2]};"
@@ -56,21 +56,19 @@ class Team():
         return [self.win, self.lost, self.draws]
     def reset_stats(self):
         self.win = self.lost = self.draws = 0
-    def add_win(self, n):
-        self.win += n
+    def add_win(self):
+        self.win += 1
         for player in self.players:
             player.add_win()
-    def add_lost(self, n):
-        self.lost += n
+    def add_lost(self):
+        self.lost += 1
         for player in self.players:
             player.add_lost()
-    def add_draws(self, n):
-        self.draws += n
+    def add_draws(self):
+        self.draws += 1
         for player in self.players:
             player.add_draw()
 
-        
-    
     def __str__(self):
         l = self.get_stats()
         return f" --> Team \"{self.get_name()}\" - membri: {self.get_printed_players()} - vittorie: {l[0]}, sconfitte: {l[1]}, pareggi: {l[2]};"
@@ -88,16 +86,15 @@ class Match():
         self.status = MatchStatus.FINITA
 
         if self.score_a > self.score_b:
-            self.team_a.add_win(1) 
-            self.team_b.add_lost(1) 
+            self.team_a.add_win() 
+            self.team_b.add_lost() 
         elif self.score_a < self.score_b:
-            self.team_a.add_lost(1)
-            self.team_b.add_win(1) 
+            self.team_a.add_lost()
+            self.team_b.add_win() 
         else: 
-            self.team_a.add_draws(1)
-            self.team_b.add_draws(1)
+            self.team_a.add_draws()
+            self.team_b.add_draws()
             
-
     def get_name(self):
         return self.name
     def get_date(self):
@@ -106,9 +103,6 @@ class Match():
         return [self.team_a.get_name(), self.team_b.get_name()]
     def get_score(self):
         return [self.score_a, self.score_b]
-    def add_score(self, score_a, score_b):
-        self.score_a += score_a
-        self.score_b += score_b
     def get_status(self):
         return self.status.value
     def __str__(self):
