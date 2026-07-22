@@ -58,10 +58,18 @@ class Team():
         self.win = self.lost = self.draws = 0
     def add_win(self, n):
         self.win += n
+        for player in self.players:
+            player.add_win()
     def add_lost(self, n):
         self.lost += n
+        for player in self.players:
+            player.add_lost()
     def add_draws(self, n):
         self.draws += n
+        for player in self.players:
+            player.add_draw()
+
+        
     
     def __str__(self):
         l = self.get_stats()
