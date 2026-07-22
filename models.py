@@ -59,9 +59,9 @@ class Team():
     def add_win(self, n):
         self.win += n
     def add_lost(self, n):
-        self.win += n
+        self.lost += n
     def add_draws(self, n):
-        self.win += n
+        self.draws += n
     
     def __str__(self):
         l = self.get_stats()
@@ -77,7 +77,19 @@ class Match():
         self.team_b = team_b
         self.score_a = score_a
         self.score_b = score_b
-        self.status = MatchStatus.DA_INIZIARE
+        self.status = MatchStatus.FINITA
+
+        if self.score_a > self.score_b:
+            self.team_a.add_win(1) 
+            self.team_b.add_lost(1) 
+        elif self.score_a < self.score_b:
+            self.team_a.add_lost(1)
+            self.team_b.add_win(1) 
+        else: 
+            self.team_a.add_draws(1)
+            self.team_b.add_draws(1)
+            
+
     def get_name(self):
         return self.name
     def get_date(self):
