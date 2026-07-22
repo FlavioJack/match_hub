@@ -92,7 +92,7 @@ class Match():
     def get_status(self):
         return self.status.value
     def __str__(self):
-        return f" --> Match {self.get_status()} || {self.get_teams_names()[0]} {self.get_score()[0]} - {self.get_score()[1]} {self.get_teams_names()[1]} || {self.get_date()}."
+        return f" --> Match {self.get_teams_names()[0]} {self.get_score()[0]} - {self.get_score()[1]} {self.get_teams_names()[1]} || {self.get_date()}."
 
     
     
