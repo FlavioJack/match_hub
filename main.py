@@ -5,6 +5,7 @@ ENTER_NAME_CANCEL = "Inserisci il nome del giocatore o premi Enter per annullare
 ENTER_NEW_NAME = "Inserisci il nuovo nome: "
 VAL_RANGE_ERR = "⚠️ Il valore deve essere compreso nel range."
 VAL_TYPE_ERR = "⚠️ Hai inserito un valore non consentito."
+GENERIC_ERR = "⚠️ Errore!"
 NAME_NOT_VALID = "❌ Nome non presente tra quelli disponibili, controlla maiuscole e minuscole."
 PLAYERS_ADDED_OK = "✅ Giocatori inseriti correttamente!"
 ACTION_EXECUTED_NOERR = "✅ Azione eseguita correttamente!"
@@ -69,19 +70,20 @@ def show_match_menu():
     print(" 2  -  Mostra Partite e loro Statistiche")
     print(" 3  -  Elimina Partita")
 
-
 def show_save_menu():
     print("\n\n===== IMPORTA/ESPORTA FILE SALVATAGGIO =====")
     print(" 1  -  Importa file")
     print(" 2  -  Esporta file")
         
-
-
-
-
+##################################################################################################
+##################################################################################################
+############################################## MAIN ##############################################
+##################################################################################################
+##################################################################################################
 
 def main():
 
+    # data structures containing main objects: players, teams and matches
     players_register = {}
     teams_register = {}
     matches_register = []
@@ -95,23 +97,29 @@ def main():
             while True:
                 show_player_menu()
                 submenu = input(SELECT_SUBMENU).strip()
+
                 # CREATE PLAYER
                 if submenu == "1":
                     print("\nCREAZIONE GIOCATORI ")
                     while True:
                         player_name = input(ENTER_NAME_CANCEL).strip()
-                        if player_name not in players_register and player_name != "":
+                        if not player_name:
+                            break
+                        if player_name in players_register:
+                            print("❌ Nome già in uso, scegline un altro!")
+                            continue
+                        try: 
                             registration(player_name, players_register, 1)
                             print(f"✅ Nome \"{player_name}\" inserito correttamente!")
-                        elif player_name.strip() != "":
-                            print("❌ Nome già in uso, scegline un altro!")
-                        else:
-                            break
+                        except Exception as e: 
+                            print(f"⚠️ Errore, registrazione giocatore fallita: {e}")
+             
                 # SHOW PLAYERS STATS   
                 elif submenu == "2":
                     print("\nELENCO GIOCATORI E STATISTICHE ")
                     for name in players_register:
                         print(players_register[name])
+
                 # EDIT/DELETE PLAYER
                 elif submenu == "3":
                     print("\nMODIFICA O ELIMINA GIOCATORE ")
@@ -131,7 +139,7 @@ def main():
                                     players_register.pop(player_name)
                                     players_register[new_name] = player
                                 except:
-                                    print("Errore!")
+                                    print(GENERIC_ERR)
                                 else:
                                     print(f"✅ Nome \"{player_name}\" -> \"{new_name}\" modificato correttamente!")
                             # RESET STATS
@@ -139,7 +147,7 @@ def main():
                                 try:
                                     player.reset_stats()
                                 except:
-                                    print("Errore!")
+                                    print(GENERIC_ERR)
                                 else:
                                     print(f"✅ Statistiche di \"{player_name}\" resettate correttamente!")
                             # DELETE PLAYER
@@ -149,7 +157,7 @@ def main():
                                     try:
                                         players_register.pop(player_name)
                                     except:
-                                        print("Errore!")
+                                        print(GENERIC_ERR)
                                     else:
                                         print(f"✅ Giocatore \"{player_name}\" eliminato con successo!")
                                 else: print(CANCELLED_OPERATION)
@@ -193,7 +201,7 @@ def main():
                         try:
                             for player in players_for_team:
                                 new_team.add_player(players_register[player])
-                        except: print("Errore!")
+                        except: print(GENERIC_ERR)
                         else: print(PLAYERS_ADDED_OK)
                         
                 # SHOW TEAMS STATS
@@ -220,7 +228,7 @@ def main():
                                     teams_register.pop(team_name)
                                     teams_register[new_name] = team
                                 except:
-                                    print("Errore!")
+                                    print(GENERIC_ERR)
                                 else:
                                     print(f"✅ Nome \"{team_name}\" -> \"{new_name}\" modificato correttamente!")
                             # RESET TEAM STATS
@@ -228,7 +236,7 @@ def main():
                                 try:
                                     team.reset_stats()
                                 except:
-                                    print("Errore!")
+                                    print(GENERIC_ERR)
                                 else:
                                     print(f"✅ Statistiche di \"{team_name}\" resettate correttamente!")
                             # ADD PLAYER TO TEAM
@@ -254,7 +262,7 @@ def main():
                                 try:
                                     for player in players_for_team:
                                         new_team.add_player(players_register[player])
-                                except: print("Errore!")
+                                except: print(GENERIC_ERR)
                                 else: print(PLAYERS_ADDED_OK)
                             # DELETE PLAYER FROM TEAM
                             elif submenu == "4":
@@ -268,7 +276,7 @@ def main():
                                             try:
                                                 team.remove_player(player)
                                             except:
-                                                print("Errore!")
+                                                print(GENERIC_ERR)
                                             else:
                                                 print(f"✅ Giocatore \"{player_name}\" eliminato dalla squadra con successo!")
                                         else: print(CANCELLED_OPERATION)
@@ -281,7 +289,7 @@ def main():
                                     try:
                                         teams_register.pop(team_name) # team.remove_player(team_name)
                                     except:
-                                        print("Errore!")
+                                        print(GENERIC_ERR)
                                     else:
                                         print(f"✅ Giocatore \"{player_name}\" eliminato con successo!")
                                 else: print(CANCELLED_OPERATION)
@@ -340,7 +348,7 @@ def main():
                             matches_register.append(new_match)
                             #matches_register[new_match.get_name()] = new_match # only for dict
                         except:
-                            print("Errore!")
+                            print(GENERIC_ERR)
                         else:
                             print(f"✅ Nuova partita creata {new_match}")
                 # SHOW MATCH STATS
@@ -371,7 +379,7 @@ def main():
                             choice = input(f"Sei sicuro di voler eliminare la partita \"{match_to_delete.get_name()}\" del {match_to_delete.get_date()}? s/n: ").strip().lower()
                             if choice == "s":
                                 try: matches_register.remove(match_to_delete) #matches_register.pop(match_to_delete)
-                                except: print("Errore!")
+                                except: print(GENERIC_ERR)
                                 else: print(f"✅ Partita \"{match_to_delete}\" eliminata con successo!")
                             elif choice == "no": print(CANCELLED_OPERATION)
                             else: print(VAL_TYPE_ERR)
