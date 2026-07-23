@@ -125,9 +125,9 @@ def main():
                     print("\nMODIFICA O ELIMINA GIOCATORE ")
                     while True:
                         player_name = input(ENTER_NAME_CANCEL).strip()
-                        if player_name == "":
+                        if not player_name:
                             break
-                        elif player_name in players_register:
+                        if player_name in players_register:
                             player = players_register[player_name]
                             show_player_modify_menu()
                             submenu = input(SELECT_SUBMENU).strip()
