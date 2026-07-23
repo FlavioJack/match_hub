@@ -22,9 +22,9 @@ class Player():
     def add_win(self):
         self.win += 1
     def add_lost(self):
-        self.win += 1
+        self.lost += 1
     def add_draw(self):
-        self.win += 1
+        self.draws += 1
     def __str__(self):
         l = self.get_stats()
         return f" --> Player \"{self.get_name()}\", vittorie: {l[0]} sconfitte: {l[1]} pareggi: {l[2]};"
