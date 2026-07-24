@@ -305,10 +305,12 @@ def main():
                                         try:
                                             for player in temp_players_list:
                                                 new_team.add_player(players_register[player])
-                                            print(PLAYERS_ADDED_OK)
+                                            print(PLAYERS_ADDED_OK)  
+                                        except Exception as e: 
+                                            print(GENERIC_ERR, e)
+                                        finally:
                                             temp_players_list.clear() 
                                             break
-                                        except Exception as e: print(GENERIC_ERR, e)
                                     elif choice == "n": 
                                         print(CANCELLED_OPERATION)
                                         temp_players_list.clear()
@@ -326,29 +328,39 @@ def main():
                                 if player_name in players_register:
                                     player = players_register[player_name]
                                     if player in team.get_players():
-                                        choice = input(f"Sei sicuro di voler eliminare il giocatore \"{player_name}\" dalla squadra? s/n: ").strip().lower()
-                                        if choice == "s":
-                                            try:
-                                                team.remove_player(player)
-                                            except:
-                                                print(GENERIC_ERR)
-                                            else:
-                                                print(f"✅ Giocatore \"{player_name}\" eliminato dalla squadra con successo!")
-                                        else: print(CANCELLED_OPERATION)
+                                        while True:
+                                            choice = input(f"Sei sicuro di voler eliminare il giocatore \"{player_name}\" dalla squadra? s/n: ").strip().lower()
+                                            if choice == "s":
+                                                try:
+                                                    team.remove_player(player)
+                                                    print(f"✅ Giocatore \"{player_name}\" eliminato dalla squadra con successo!")
+                                                    break
+                                                except Exception as e: 
+                                                    print(GENERIC_ERR, e)
+                                                    break
+                                            elif choice == "n": 
+                                                print(CANCELLED_OPERATION)
+                                                break
+                                            else: print(VAL_TYPE_ERR)
                                     else: print("Giocatore non presente in squadra!")
                                 else: print(NAME_NOT_VALID)
 
                             # DELETE TEAM
                             elif submenu == "5":
-                                choice = input(f"Sei sicuro di voler eliminare la squadra \"{team_name}\"? s/n: ").strip().lower()
-                                if choice == "s":
-                                    try:
-                                        teams_register.pop(team_name) # team.remove_player(team_name)
-                                    except:
-                                        print(GENERIC_ERR)
-                                    else:
-                                        print(f"✅ Giocatore \"{player_name}\" eliminato con successo!")
-                                else: print(CANCELLED_OPERATION)
+                                while True:
+                                    choice = input(f"Sei sicuro di voler eliminare la squadra \"{team_name}\"? s/n: ").strip().lower()
+                                    if choice == "s":
+                                        try:
+                                            teams_register.pop(team_name)
+                                            print(f"✅ Giocatore \"{player_name}\" eliminato con successo!")
+                                            break
+                                        except Exception as e: 
+                                            print(GENERIC_ERR, e)
+                                            break
+                                    elif choice == "n":    
+                                        print(CANCELLED_OPERATION)
+                                        break
+                                    else: print(VAL_TYPE_ERR)
                             else: print(VAL_RANGE_ERR)
                         else: print(NAME_NOT_VALID)
                 else: print(VAL_RANGE_ERR)
