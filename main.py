@@ -24,16 +24,7 @@ def team_registration(name, register):
 def available_players(players_register):
     players_list = ", ".join(players_register)+";"
     return players_list
-    
-def get_player(players_register, player_name):
-    return players_register[player_name]
 
-def get_team(teams_register, team_name):
-    return teams_register[team_name]
-
-def get_match(match_register, match_name):
-    return match_register[match_name]
-        
 def show_main_menu():
     print("\n\n########## MAIN MENU ##########")
     print(" 1  -  Giocatori")
@@ -316,15 +307,10 @@ def main():
                                         temp_players_list.clear()
                                         break
                                     else: print(VAL_TYPE_ERR)
-#--------------------------------------------------------------------------------------------------------------------------------
-# CONTINUA REFACTORING DA QUI
-#   |       |       |
-#   V       V       V
 
                             # DELETE PLAYER FROM TEAM
                             elif submenu == "4":
                                 player_name = input("Inserisci il nome del giocatore da rimuovere + Enter o premi Enter per annullare/terminare: ").strip()
-                                # get player func
                                 if player_name in players_register:
                                     player = players_register[player_name]
                                     if player in team.get_players():
@@ -364,6 +350,12 @@ def main():
                             else: print(VAL_RANGE_ERR)
                         else: print(NAME_NOT_VALID)
                 else: print(VAL_RANGE_ERR)
+
+#--------------------------------------------------------------------------------------------------------------------------------
+# CONTINUA REFACTORING DA QUI
+#   |       |       |
+#   V       V       V
+
         
         # MENU MATCH
         elif sel_menu == "3":
